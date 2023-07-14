@@ -1,0 +1,510 @@
+knowledge base nazwa
+ facets
+       serial:
+              
+              val someof{"Monster(2004)", "Brooklyn 99", "Breaking Bad", "Rick and Morty", "BoJack Horseman", "Narcos", "Banana Fish", "House of Cards", "Death Note",
+              "Haikyuu", "Demon Slayer", "Made in Abyss", "Stranger Things", "Black Mirror", "Dark", "Utopia(2013)", "Great Teacher Onizuka",
+              "Barry", "Mr.Robot", "How I met your Mother", "Locke and Key", "The Punisher", "Daredevil", "South Park", "The Walking Dead", "Ash vs Evil Dead", "Czarnobyl"
+              ,"The Office", "Dom z papieru", "Shingeki no Kyojin", "Steins Gate","Miłość, śmierć i roboty"} 
+                                  
+              picture{"Monster(2004).bmp", "Brooklyn 99.bmp", "Breaking Bad.bmp", "Rick and Morty.bmp", "BoJack Horseman.bmp", "Narcos.bmp",
+              "Banana Fish.bmp", "House of Cards.bmp", "Death Note.bmp", "Haikyuu.bmp", "Demon Slayer.bmp", "Made in Abyss.bmp", "Stranger Things.bmp",
+              "Black Mirror.bmp", "Dark.bmp", "Utopia(2013).bmp", "Great Teacher Onizuka.bmp", "Barry.bmp", "Mr.Robot.bmp", 
+              "How I met your Mother.bmp", "Locke and Key.bmp", "The Punisher.bmp", "Daredevil.bmp", "South Park.bmp", "The Walking Dead.bmp", "Ash vs Evil Dead.bmp", "Czarnobyl.bmp",
+              "The Office.bmp", "Dom z papieru.bmp", "Shingeki no Kyojin.bmp", "Steins Gate.bmp", "Miłość, śmierć i roboty.bmp"}; 
+       gatunek:
+               query"Jakie gatunki preferujesz?"
+               val someof{"Komedia","Horror","Sci fi","Akcja","Czarna komedia","Dramat","Anime"};
+       animacja:
+                query"Wśród jakich seriali wyszukiwać?"
+                val someof{"Zwykłych","Animowanych"};
+       czasodc:
+               query"Jak długie mają być odcinki"
+               val someof{"20 minut","40 minut","60 minut","Bez znaczenia"};
+       dlugosc:
+               query"Jak dużo odcinków ma mieć serial?"
+               val someof {"10","20","40","60","80",">100"}; 
+       dostepnosc:
+                  query"Na jakich serwisach ma być dostępny serial?"
+                  val someof{"Netflix","CDA", "HBO GO","Pozostałe"};       
+       pochodzenie:
+             query"Jakiego pochodzenia powinien być serial?"
+             val someof{"USA", "JPN","Inny"};             
+       dubbingpl:
+                query"Czy serial ma mieć dubbing?"
+                val oneof{"Tak","Nie"};     
+       zakonczony:
+             query"Czy serial ma być zakończony?"
+             val someof{"W produkcji","Zakończony"}; 
+       dlugosc_gatunek:
+             val someof{"dlugi horror","krotki horror","dluga komedia","krotka komedia", "dlugi dramat", "krotki dramat",
+             "dlugi sci fi", "krotki sci fi","dluga akcja","krotka akcja","dluga czarna komedia","krotka czarna komedia",
+             "dlugie anime", "krotkie anime"};
+ end;
+ rules
+      
+      01:
+      serial="Monster(2004)" 
+      if
+      dlugosc_gatunek="dlugi horror",
+      animacja="Animowanych",
+      (czasodc="20 minut"|czasodc="Bez znaczenia"),
+      (dostepnosc="CDA" |dostepnosc="Pozostałe"),
+      pochodzenie="JPN",
+      dubbingpl="Nie",
+      zakonczony="Zakończony";
+      02:
+      serial="Brooklyn 99"
+      if
+      dlugosc_gatunek="dluga komedia",
+      animacja="Zwykłych",
+      (czasodc="20 minut"|czasodc="Bez znaczenia"),
+      (dostepnosc="Netflix" |dostepnosc="Pozostałe"),
+      (pochodzenie="USA"|dubbingpl="Nie"),
+      zakonczony="W produkcji";
+      03:
+      serial="Breaking Bad"
+      if
+      dlugosc_gatunek="dlugi dramat",
+      animacja="Zwykłych",
+      (czasodc="40 minut"|czasodc="Bez znaczenia"),
+      (dostepnosc="Netflix"|dostepnosc="Pozostałe"),
+      (pochodzenie="USA"|dubbingpl="Nie"),
+      zakonczony="Zakończony";
+      
+      04:
+      serial="Rick and Morty"
+      if
+      (dlugosc_gatunek="krotki sci fi"|dlugosc_gatunek="krotka czarna komedia"|dlugosc_gatunek="krotka komedia"),
+      animacja="Animowanych",
+      (czasodc="20 minut"|czasodc="Bez znaczenia"),
+      (dostepnosc="Netflix"|dostepnosc="Pozostałe"),
+      (pochodzenie=JPN|dubbingpl="Tak"),
+      zakonczony="W produkcji";
+      05:
+      serial="BoJack Horseman"
+      if
+      (dlugosc_gatunek="dluga komedia"|dlugosc_gatunek="dlugi dramat"),
+      animacja="Animowanych",
+      (czasodc="20 minut"|czasodc="Bez znaczenia"),
+      (dostepnosc="Netflix"|dostepnosc="Pozostałe"),
+      (pochodzenie="USA"|dubbingpl="Tak"),
+      zakonczony="Zakończony";
+      06:
+      serial="Narcos"
+      if
+      dlugosc_gatunek="krotki dramat",
+      animacja="Zwykłych",
+      (czasodc="60 minut"|czasodc="Bez znaczenia"),
+      (dostepnosc="Netflix"|dostepnosc="Pozostałe"),
+      (pochodzenie="USA"|dubbingpl="Nie"),
+      zakonczony="Zakończony";
+      07:
+      serial="Banana Fish"
+      if
+      (dlugosc_gatunek="krotki dramat"|dlugosc_gatunek="krotkie anime"),
+      animacja="Animowanych",
+      (czasodc="20 minut"|czasodc="Bez znaczenia"),
+      (dostepnosc="CDA"|dostepnosc="Pozostałe"),
+      pochodzenie="JPN",
+      dubbingpl="Tak",
+      zakonczony="W produkcji";
+      08:
+      serial="House of Cards"
+      if
+      dlugosc_gatunek="dlugi dramat",
+      animacja="Zwykłych",
+      (czasodc="40 minut"|czasodc="Bez znaczenia"),
+      (dostepnosc="Netflix", dostepnosc="Pozostałe"),
+      (pochodzenie="USA"|dubbingpl="Nie"),
+      zakonczony="Zakończony";
+      09:
+      serial="Death Note"
+      if
+      dlugosc_gatunek="krotkie anime",
+      animacja="Animowanych",
+      (czasodc="20 minut"|czasodc="Bez znaczenia"),
+      (dostepnosc="CDA", dostepnosc="Pozostałe"),
+      pochodzenie="JPN",
+      dubbingpl="Tak",
+      zakonczony="Zakończony";
+      10:
+      serial="Haikyuu"
+      if
+      (dlugosc_gatunek="dluga komedia"|dlugosc_gatunek="krotka akcja"|dlugosc_gatunek="dlugie anime"),
+      animacja="Animowanych",
+      (czasodc="20 minut"|czasodc="Bez znaczenia"),
+      (dostepnosc="CDA"|dostepnosc="Pozostałe"),
+      pochodzenie="JPN",
+      dubbingpl="Nie",
+      zakonczony="W produkcji";
+      11:
+      serial="Demon Slayer"
+      if
+      (dlugosc_gatunek="krotka akcja"|dlugosc_gatunek="krotkie anime"),
+      animacja="Animowanych",
+      (czasodc="20 minut"|czasodc="Bez znaczenia"),
+      dostepnosc="Pozostałe",
+      pochodzenie="JPN",
+      dubbingpl="Tak",
+      zakonczony="W produkcji";
+      12:
+      serial="Made in Abyss"
+      if
+      (dlugosc_gatunek="krotki dramat"|dlugosc_gatunek="krotkie anime"|dlugosc_gatunek="krotki sci fi"),
+      animacja="Animowanych",
+      (czasodc="20 minut"|czasodc="Bez znaczenia"),
+      dostepnosc="Pozostałe",
+      pochodzenie="JPN",
+      dubbingpl="Nie",
+      zakonczony="W produkcji";
+      13:
+      serial="Stranger Things"
+      if
+      (dlugosc_gatunek="krotki horror"|dlugosc_gatunek="krotki dramat"|dlugosc_gatunek="krotki sci fi"),
+      animacja="Zwykłych",
+      (czasodc="60 minut"|czasodc="Bez znaczenia"),
+      (dostepnosc="Netflix", dostepnosc="Pozostałe"),
+      (pochodzenie="USA"|dubbingpl="Nie"),
+      zakonczony="W produkcji";
+      14:
+      serial="Black Mirror"
+      if
+      dlugosc_gatunek="krotki sci fi",
+      animacja="Zwykłych",
+      (czasodc="60 minut"|czasodc="Bez znaczenia"),
+      (dostepnosc="Netflix", dostepnosc="Pozostałe"),
+      (pochodzenie="USA"|dubbingpl="Nie"),
+      zakonczony="W produkcji";
+      15:
+      serial="Dark"
+      if
+      dlugosc_gatunek="krotki sci fi",
+      animacja="Zwykłych",
+      (czasodc="60 minut"|czasodc="Bez znaczenia"),
+      (dostepnosc="Netflix",dostepnosc="Pozostałe"),
+      (pochodzenie="Inny"|dubbingpl="Nie"),
+      zakonczony="Zakończony";
+      16:
+      serial="Utopia(2013)"
+      if
+      (dlugosc_gatunek="krotki dramat"|dlugosc_gatunek="krotki sci fi"),
+      animacja="Zwykłych",
+      (czasodc="40 minut"|czasodc="Bez znaczenia"),
+      (dostepnosc="CDA"|dostepnosc="Pozostałe"),
+      (pochodzenie="Inny"|dubbingpl="Nie"),
+      zakonczony="Zakończony";
+      17:
+      serial="Shingeki no Kyojin"
+      if
+      (dlugosc_gatunek="dluga akcja"|dlugosc_gatunek="dlugi sci fi"|dlugosc_gatunek="dlugie anime"),
+      animacja="Animowanych",
+      (czasodc="20 minut"|czasodc="Bez znaczenia"),
+      dostepnosc="Pozostałe",
+      (pochodzenie="JPN"|dubbingpl="Nie"),
+      zakonczony="W produkcji";
+      18:
+      serial="Great Teacher Onizuka"
+      if
+      (dlugosc_gatunek="krotka komedia"|dlugosc_gatunek="krotka akcja"|dlugosc_gatunek="krotkie anime"),
+      animacja="Animowanych",
+      (czasodc="20 minut"|czasodc="Bez znaczenia"),
+      (dostepnosc="Pozostałe", dostepnosc="CDA"),
+      pochodzenie="JPN",
+      dubbingpl="Tak",
+      zakonczony="Zakończony";
+      19:
+      serial="Barry"
+      if
+      (dlugosc_gatunek="krotka komedia"|dlugosc_gatunek="krotki dramat"),
+      animacja="Zwykłych",
+      (czasodc="20 minut"|czasodc="Bez znaczenia"),
+      (dostepnosc="HBO GO"|dostepnosc="Pozostałe"),
+      pochodzenie="USA",
+      dubbingpl="Nie",
+      zakonczony="W produkcji";
+      20:
+      serial="Mr.Robot"
+      if
+      dlugosc_gatunek="krotki dramat",
+      animacja="Zwykłych",
+      (czasodc="40 minut"|czasodc="Bez znaczenia"),
+      (dostepnosc="HBO GO"|dostepnosc="Pozostałe"),
+      pochodzenie="USA",
+      dubbingpl="Nie",
+      zakonczony="Zakończony";
+      21:
+      serial="How I met your Mother"
+      if
+      dlugosc_gatunek="dluga komedia",
+      animacja="Zwykłych",
+      (czasodc="20 minut"|czasodc="Bez znaczenia"),
+      (dostepnosc="Netflix"|dostepnosc="Pozostałe"),
+      (pochodzenie="USA"|dubbingpl="Nie"),
+      zakonczony="Zakończony";
+      22:
+      serial="Locke and Key"
+      if
+      (dlugosc_gatunek="krotki sci fi"|dlugosc_gatunek="krotki dramat"),
+      animacja="Zwykłych",
+      (czasodc="40 minut"|czasodc="Bez znaczenia"),
+      dostepnosc="Netflix",
+      (pochodzenie="USA"|dubbingpl="Nie"),
+      zakonczony="W produkcji"; 
+      23:
+      serial="The Punisher"
+      if
+      (dlugosc_gatunek="krotka akcja"|dlugosc_gatunek="krotki dramat"),
+      animacja="Zwykłych",
+      (czasodc="40 minut"|czasodc="Bez znaczenia"),
+      dostepnosc="Netflix",
+      (pochodzenie="USA"|dubbingpl="Nie"),
+      zakonczony="Zakończony"; 
+      24:
+      serial="Daredevil"
+      if
+      (dlugosc_gatunek="krotka akcja"|dlugosc_gatunek="krotki dramat"),
+      animacja="Zwykłych",
+      (czasodc="60 minut"|czasodc="Bez znaczenia"),
+      (dostepnosc="Netflix"|dostepnosc="Pozostałe"),
+      (pochodzenie="USA"|dubbingpl="Nie"),
+      zakonczony="Zakończony"; 
+      25:
+      serial="South Park"
+      if
+      (dlugosc_gatunek="dluga komedia"|dlugosc_gatunek="dluga czarna komedia"),
+      animacja="Animowanych",
+      (czasodc="20 minut"|czasodc="Bez znaczenia"),
+      (dostepnosc="Netflix"|dostepnosc="Pozostałe"),
+      (pochodzenie="USA"|dubbingpl="Tak"),
+      zakonczony="W produkcji";
+      26:
+      serial="The Walking Dead"
+      if
+      (dlugosc_gatunek="dlugi horror"|dlugosc_gatunek="dlugi dramat"),
+      animacja="Zwykłych",
+      (czasodc="40 minut"|czasodc="Bez znaczenia"),
+      dostepnosc="Netflix",
+      pochodzenie="USA",
+      dubbingpl="Tak",
+      zakonczony="W produkcji"; 
+      27:
+      serial="Ash vs Evil Dead"
+      if
+      (dlugosc_gatunek="krotka komedia"|dlugosc_gatunek="krotki horror"),
+      animacja="Zwykłych",
+      (czasodc="40 minut"|czasodc="Bez znaczenia"),
+      dostepnosc="Netflix",
+      pochodzenie="USA",
+      dubbingpl="Nie",
+      zakonczony="Zakończony";
+      28:
+      serial="Czarnobyl"
+      if
+      dlugosc_gatunek="krotki dramat",
+      animacja="Zwykłych",
+      (czasodc="60 minut"|czasodc="Bez znaczenia"),
+      (dostepnosc="HBO GO"|dostepnosc="Pozostałe"),
+      pochodzenie="Inny",
+      dubbingpl="Nie",
+      zakonczony="Zakończony";
+      29:
+      serial="The Office"
+      if
+      dlugosc_gatunek="dluga komedia",
+      animacja="Zwykłych",
+      (czasodc="20 minut"|czasodc="Bez znaczenia"),
+      (dostepnosc="Netflix", dostepnosc="Pozostałe"),
+      pochodzenie="USA",
+      dubbingpl="Nie",
+      zakonczony="Zakończony";
+      30:
+      serial="Dom z papieru"
+      if
+      (dlugosc_gatunek="krotka komedia"|dlugosc_gatunek="krotki dramat"),
+      animacja="Zwykłych",
+      (czasodc="40 minut"|czasodc="Bez znaczenia"),
+      dostepnosc="Netflix",
+      pochodzenie="USA",
+      dubbingpl="Nie",
+      zakonczony="W produkcji";
+      31:
+      serial="Steins Gate"
+      if
+      (dlugosc_gatunek="krotki sci fi"|dlugosc_gatunek="krotkie anime"),
+      animacja="Animowanych",
+      (czasodc="20 minut"|czasodc="Bez znaczenia"),
+      dostepnosc="Pozostałe",
+      pochodzenie="JPN",
+      dubbingpl="Nie",
+      zakonczony="Zakończony";
+      32:
+      serial="Miłość, śmierć i roboty"
+      if
+      (dlugosc_gatunek="krotki sci fi", dlugosc_gatunek="krotki dramat"),
+      animacja="Animowanych",
+      czasodc="Bez znaczenia",
+      (dostepnosc="Netflix"|dostepnosc="Pozostałe"),
+      (pochodzenie="USA"|dubbingpl="Tak"),
+      zakonczony="W produkcji";
+      
+      33:
+      dlugosc_gatunek = "dlugi horror" if
+                      (dlugosc="60" | dlugosc="80"| dlugosc=">100"),
+                       gatunek = "Horror";
+      34:                         
+      dlugosc_gatunek = "krotki horror" if
+                      (dlugosc="10" | dlugosc="20"| dlugosc="40"),
+                      gatunek = "Horror";
+      35:                         
+      dlugosc_gatunek = "dlugi dramat" if
+                      (dlugosc="60" | dlugosc="80"| dlugosc=">100"),
+                      gatunek = "Dramat";
+      36:                         
+      dlugosc_gatunek = "krotki dramat" if
+                      (dlugosc="10" | dlugosc="20"| dlugosc="40"),
+                      gatunek = "Dramat"; 
+      37:                         
+      dlugosc_gatunek = "dluga komedia" if
+                      (dlugosc="60" | dlugosc="80"| dlugosc=">100"),
+                      gatunek = "Komedia";
+      38:                         
+      dlugosc_gatunek = "krotka komedia" if
+                      (dlugosc="10" | dlugosc="20"| dlugosc="40"),
+                      gatunek = "Komedia";
+      39:                         
+      dlugosc_gatunek = "dlugie anime" if
+                      (dlugosc="60" | dlugosc="80"| dlugosc=">100"),
+                      gatunek = "Anime";
+      40:                         
+      dlugosc_gatunek = "krotkie anime" if
+                      (dlugosc="10" | dlugosc="20"| dlugosc="40"),
+                      gatunek = "Anime";
+      41:                         
+      dlugosc_gatunek = "dluga akcja" if
+                      (dlugosc="60" | dlugosc="80"| dlugosc=">100"),
+                      gatunek = "Akcja";
+      42:                         
+      dlugosc_gatunek = "krotka akcja" if
+                      (dlugosc="10" | dlugosc="20"| dlugosc="40"),
+                      gatunek = "Akcja"; 
+      43:                         
+      dlugosc_gatunek = "dluga czarna komedia" if
+                      (dlugosc="60" | dlugosc="80"| dlugosc=">100"),
+                      gatunek = "Czarna komedia";  
+      44:                         
+      dlugosc_gatunek = "krotka czarna komedia" if
+                      (dlugosc="10" | dlugosc="20"| dlugosc="40"),
+                      gatunek = "Czarna komedia";  
+      45:                         
+      dlugosc_gatunek = "dlugi sci fi" if
+                      (dlugosc="60" | dlugosc="80"| dlugosc=">100"),
+                      gatunek = "Sci fi";
+      46:                         
+      dlugosc_gatunek = "krotki sci fi" if
+                      (dlugosc="10" | dlugosc="20"| dlugosc="40"),
+                      gatunek = "Sci fi";                  
+ end;
+ control
+ char Title;
+ int TitleID;
+  
+        function otwórzArkusz
+  begin 
+  char ARKUSZ1;  
+  ARKUSZ1 := "ARKUSZ1";
+    openSheet( ARKUSZ1, "seriale.vts" );
+  
+    showSheet( ARKUSZ1, 1 );
+  
+
+  end;
+       function zapiszArkusz
+  begin
+     char ARKUSZ;
+     getActiveWindow( ARKUSZ );
+     if ( ARKUSZ <> "" )
+     begin
+       char TYP;
+       getWindowType( ARKUSZ, TYP );
+       if ( TYP == "sheet" )
+       begin
+         writeSheet( ARKUSZ, "" );
+       end;
+     end;
+  end;
+  function nowyArkusz
+  begin
+     TitleID := TitleID + 1;
+     sprintf( Title, "Arkusz %d", TitleID );
+     openSheet( Title, "" );
+     showSheet( Title, 1 );
+  end;
+
+        function start   
+        begin
+             int Odp;
+             Odp:=1;
+             
+               while(Odp==1)
+                  begin  
+                  goal("serial=X");
+                  confirmBox(0,0,"Kontynuuj","Czy chcesz ponownie wnioskować?",Odp);
+                  delNewFacts;
+                  end;
+        end;
+        
+        function zamkniecie
+        begin
+             mainMenu;
+        end;
+        
+        function autor
+        begin
+             messageBox(0,0,"Autor: ", "Kacper");
+        end;
+        
+        function informacje
+        begin
+              char S1,S2,S3;
+                 run;
+                 S1:="Dobór serialu";
+                 S2:="Program pomagający w wybraniu serialu do obejrzenia na podstawie preferencji użytkownika";
+                 S3:="Wykonał: Kacper Olejnik";
+                 vignette(S1,S2,S3);
+        end;
+        function otwarcie_aplikacji
+        begin
+                 char S1,S2,S3;
+                 run;
+                 setAppWinTitle("Dobór serialu");
+                 S1:="Dobór serialu";
+                 S2:="Program pomagający w wybraniu serialu do obejrzenia";
+                 S3:="Systemy Ekspertowe 22/23";
+                 createAppWindow;
+                 vignette(S1,S2,S3);
+        end;
+      int MENUID,POPUPID;
+      int TitleID1;
+      TitleID1:=0;
+      setAppWinTitle("Dobór serialu");
+      otwarcie_aplikacji;
+      
+      createMenu(MENUID);
+                       
+      createPopupMenu( POPUPID,"Rozpocznij");
+      appendMenu(POPUPID,"Rozpocznij Wybieranie", start);
+      appendMenu(POPUPID,separator,_);
+      appendMenu(POPUPID,"Zamknij",zamkniecie);
+      appendMenu(MENUID,menu,POPUPID);
+      createPopupMenu(POPUPID, "Arkusze");
+      appendMenu(POPUPID, "Nowy arkusz", nowyArkusz );      
+      appendMenu(POPUPID, "Baza seriali", otwórzArkusz );
+      appendMenu(POPUPID, "Zapisz arkusz", zapiszArkusz );
+      appendMenu(MENUID,menu,POPUPID);
+      createPopupMenu(POPUPID,"Pomoc");
+      appendMenu(POPUPID,"O Programie",informacje);
+      appendMenu(MENUID,menu,POPUPID);
+      fullMenu(MENUID);
+ end;
+end;
